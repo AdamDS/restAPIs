@@ -205,7 +205,7 @@ class populationmeasures( object ):
 		return annoName + str( self.total )
 	def __str__( self , **kwargs ):
 		delim = kwargs.get( 'delim' , '\t' )
-		print(delim.join( map( str , self.__all__() ) ))
+		print delim.join( map( str , self.__all__() ) )
 	def fieldName( self , pop ):
 		if pop:
 			return self.valueType + "_" + pop

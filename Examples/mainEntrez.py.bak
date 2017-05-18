@@ -18,15 +18,15 @@ def parseArgs( argv ):
 	try:
 		opts, args = getopt.getopt( argv , "h:i:d:q:o:" , ["input=" , "database=" , "query=" , "output="] )
 	except getopt.GetoptError:
-		print("biomine ERROR: Command not recognized")
+		print "biomine ERROR: Command not recognized"
 		print( helpText ) 
 		sys.exit(2)
 	if not opts:
-		print("biomine ERROR: Expected flagged input")
+		print "biomine ERROR: Expected flagged input"
 		print( helpText ) 
 		sys.exit(2)
 	for opt, arg in opts:
-		print(opt + " " + arg)
+		print opt + " " + arg
 		if opt in ( "-h" , "--help" ):
 			print( helpText )
 			sys.exit()
@@ -45,9 +45,9 @@ def checkConnection():
 	summaryTest = "http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?db=pubmed&id=20113659,20074456"
 	res = requests.get( entrezInstance )
 	if res:
-		print("have response")
+		print "have response"
 	else:
-		print(res.status_code)
+		print res.status_code
 
 def readDBSearches( inputFile ):
 	searches = []
@@ -80,10 +80,10 @@ def main( argv ):
 	elif inputFile and not outputFormat:
 		results = entrezInstance.getPubMedDetails( searches , search = search , identifier = identifier )
 
-	print(results)
+	print results
 
 	if query:
-		print(queries)
+		print queries
 		if database == "pubmed":
 			results = entrezInstance.searchPubMed( queries["searches"] )
 		if database == "clinvar":
@@ -92,7 +92,7 @@ def main( argv ):
 	#results = entrezInstance.getClinicalSignificance( queries["searches"] )
 	#entrezInstance.getClinicalSignificance( queries["searches"] )
 
-	print(results.text)
+	print results.text
 
 if __name__ == "__main__":
 	main( sys.argv[1:] )

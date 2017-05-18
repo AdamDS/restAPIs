@@ -47,7 +47,7 @@ class pubchemapi(webapi):
 				 subset == pubchemapi.substance ):
 				super(pubchemapi,self).__init__(pubchemapi.endpoint,subset)
 			else:
-				print("biomine ERROR: bad subset. webapi.subset initializing to variant association results")
+				print "biomine ERROR: bad subset. webapi.subset initializing to variant association results"
 				super(pubchemapi,self).__init__(pubchemapi.endpoint,pubchemapi.compound)
 
 	def setSubset(self,subset):

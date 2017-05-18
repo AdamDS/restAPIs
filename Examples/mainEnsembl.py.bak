@@ -19,11 +19,11 @@ def parseArgs( argv ):
 	try:
 		opts, args = getopt.getopt( argv , "tmh:i:o:s:" , ["input=" , "output=" , "hgvs="] )
 	except getopt.GetoptError:
-		print("biomine ERROR: Command not recognized")
+		print "biomine ERROR: Command not recognized"
 		print( helpText ) 
 		sys.exit(2)
 	if not opts:
-		print("biomine ERROR: Expected flagged input")
+		print "biomine ERROR: Expected flagged input"
 		print( helpText ) 
 		sys.exit(2)
 	for opt, arg in opts:
@@ -47,9 +47,9 @@ def checkConnection():
 	ensemblInstance = "http://rest.ensembl.org/info/ping?content-type=application/json"
 	res = requests.get( ensemblInstance )
 	if res:
-		print("have response")
+		print "have response"
 	else:
-		print(res.status_code)
+		print res.status_code
 
 def readMutations( inputFile ):
 	variants = []
@@ -88,15 +88,15 @@ def main( argv ):
 	if maf:
 		variants = readMAF( inputFile , codon=46 , peptideChange=47 )
 		annotated = ensemblInstance.annotateVariantsPost( variants )
-		print("annotated N=" + str(len(list(annotated.keys()))) + " variants")
-		print(list(annotated.keys()))
+		print "annotated N=" + str(len(annotated.keys())) + " variants"
+		print annotated.keys()
 		i = 1
 		for genVar in sorted(annotated.keys()):#sortedVars:
 			var = annotated[genVar]
-			print("genVar " + str(i) + ": ", end=' ')
-			print(genVar, end=' ')
-			print(": ", end=' ')
-			print(var.printVariant(', ')) 
+			print "genVar " + str(i) + ": " ,
+			print genVar ,
+			print ": " ,
+			print var.printVariant(', ') 
 			i += 1
 	else:
 		variants = readMutations( inputFile )
@@ -114,10 +114,10 @@ def main( argv ):
 				ensemblInstance.annotateHGVSScalar2Response( hgvs )
 				results = ensemblInstance.response.text
 
-	print("# OUTPUT")
-	print(results)
-	print("# URL")
-	print(ensemblInstance.buildURL())
+	print "# OUTPUT"
+	print results
+	print "# URL"
+	print ensemblInstance.buildURL()
 
 	#print ensemblInstance.headers
 	#print ensemblInstance.data

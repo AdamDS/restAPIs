@@ -72,7 +72,7 @@ class ensemblapi(webapi):
 				subset == ensemblapi.regionSubset ):
 				super(ensemblapi,self).__init__(ensemblapi.endpoint,subset)
 			else:
-				print("biomine ERROR: bad subset. webapi.subset initializing to variant association results")
+				print "biomine ERROR: bad subset. webapi.subset initializing to variant association results"
 				super(ensemblapi,self).__init__(ensemblapi.endpoint,ensemblapi.hgvsSubset)
 
 	def doAllOptions( self , **kwargs ):
@@ -205,7 +205,7 @@ class ensemblapi(webapi):
 			self.doAllOptions( data=doAllOptions )
 			for var in subsetVariants:
 				inputVariant = var.ensembl()
-				print(inputVariant)
+				print inputVariant
 				formattedVariants.append( inputVariant )
 				vepvar = vepvariant( inputVariant=inputVariant , parentVariant=var )
 				annotatedVariants[inputVariant] = vepvar
@@ -215,8 +215,8 @@ class ensemblapi(webapi):
 			self.addHeader( "Content-Type" , "application/json" )
 			[ annotatedVariants , attempts , success , timeAtSubmit ] = self.trySubmit( timeAtSubmit , **kwargs )
 			if not success:
-				print("BioMine::webapi::ensembl::ensemblapi Error: cannot access desired XML fields/tags for variants ", end=' ')
-				print("[" + str(i) + ":" + str(j) + "]")
+				print "BioMine::webapi::ensembl::ensemblapi Error: cannot access desired XML fields/tags for variants " ,
+				print "[" + str(i) + ":" + str(j) + "]"
 		return annotatedVariants
 
 	def trySubmit( self , lastSubmitTime , **kwargs ):
@@ -245,9 +245,9 @@ class ensemblapi(webapi):
 					try:
 						waitTime = self.headers['X-RateLimit-Remaining']
 					except:
-						print(( "BioMine::webapi::ensembl::ensemblapi::trySubmit Error: failed to query due to " + str( self.response.status_code ) + ": " + self.response.reason ))
+						print( "BioMine::webapi::ensembl::ensemblapi::trySubmit Error: failed to query due to " + str( self.response.status_code ) + ": " + self.response.reason )
 						return [ annotatedVariants , attempts , False , timeAtSubmit ]
-		print(( "BioMine::webapi::ensembl::ensemblapi::trySubmit Error: failed to query after " + str( attempts ) + " attempts. Stopping due to " + str( self.response.status_code ) + ": " + self.response.reason ))
+		print( "BioMine::webapi::ensembl::ensemblapi::trySubmit Error: failed to query after " + str( attempts ) + " attempts. Stopping due to " + str( self.response.status_code ) + ": " + self.response.reason )
 		return [ annotatedVariants , attempts , False , timeAtSubmit ]
 
 	def checkInsertionsReference( self , variants , **kwargs ):
@@ -268,8 +268,8 @@ class ensemblapi(webapi):
 			if self.response.ok and self.response.text:
 				needReferences = self.updateMissingReferences( variants , needReferences , **kwargs )
 			else:
-				print("References needed: ", end=' ')
-				print(needReferences)
+				print "References needed: " ,
+				print needReferences
 		return needReferences
 	def updateMissingReferences( self , variants , needReferences , **kwargs):
 		nullValue = kwargs.get( 'nullValue' , '.' )
@@ -361,7 +361,7 @@ class ensemblapi(webapi):
 			annotations += self.HGVSAnnotationHeader()
 			errors += self.HGVSErrorHeader()
 		root = self.getXMLRoot()
-		print(root)
+		print root
 		try:
 			for result in self.getElement( root , 'data' ):
 				if not self.getEntry( result , 'error' ):
@@ -390,8 +390,8 @@ class ensemblapi(webapi):
 					annotations = self.nullLine( 10 )
 					errors += "\t".join( [ geneVariant[0] , geneVariant[1] , result.get('error') ] ) + "\n"
 		except:
-			print("biomine::webapi::ensembl::annotateHGVSScalarResponse2tsv Warning: no root= ", end=' ')
-			print(root)
+			print "biomine::webapi::ensembl::annotateHGVSScalarResponse2tsv Warning: no root= " ,
+			print root
 			self.errorCheck()
 		return { "annotations" : annotations , "errors" : errors }
 	def annotateHGVSArray2tsv( self , hgvsNotatedArray , **kwargs ):
@@ -403,7 +403,7 @@ class ensemblapi(webapi):
 		for var in hgvsNotatedArray:
 			self.beginQuery();
 			hgvsNotated = var.strip()
-			print("working on: " + hgvsNotated)
+			print "working on: " + hgvsNotated
 			self.annotateHGVSScalar2Response( hgvsNotated , content = out , **kwargs )
 			results = self.annotateHGVSScalarResponse2tsv( hgvsNotated.split( ":" ) , content = out , header = head )
 			head = False
@@ -417,7 +417,7 @@ class ensemblapi(webapi):
 		if head:
 			annotations += self.HGVSAnnotationHeader()
 			errors += self.HGVSErrorHeader()
-		for hgvsNotated , response in resultDict.items():
+		for hgvsNotated , response in resultDict.iteritems():
 			geneVariant = hgvsNotated.strip().split( ":" )
 			output = self.annotateHGVSScalarResponse2tsv( geneVariant , response , header = False )
 			annotations += output["annotations"]

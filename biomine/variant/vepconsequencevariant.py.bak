@@ -110,63 +110,63 @@ class vepconsequencevariant(mafvariant):
 		onlyThisVariant = kwargs.get( 'minimal' , False )
 		if not onlyThisVariant:
 			super(vepconsequencevariant,self).printVariant( delim , **kwargs )
-		print("vepconsequencevariant: { ", end=' ')
+		print "vepconsequencevariant: { " ,
 		if self.biotype:
-			print("biotype=", end=' ')
-			print(self.biotype + delim, end=' ')
+			print "biotype=" ,
+			print self.biotype + delim ,
 		if self.terms:
-			print("terms= [", end=' ')
+			print "terms= [" ,
 			for cons in self.terms:
-				print(cons + delim, end=' ')
-			print("]" + delim, end=' ')
+				print cons + delim ,
+			print "]" + delim ,
 		if self.exon:
-			print("exon= " + self.exon + delim, end=' ')
+			print "exon= " + self.exon + delim ,
 		if self.totalExons:
-			print("totalExons= " + self.totalExons + delim, end=' ')
+			print "totalExons= " + self.totalExons + delim ,
 		if self.intron:
-			print("intron= " + self.intron+ delim, end=' ')
+			print "intron= " + self.intron+ delim ,
 		if self.ensg:
-			print("Ensembl_gene_id= " + self.ensg + delim, end=' ')
+			print "Ensembl_gene_id= " + self.ensg + delim ,
 		if self.geneSymbolSource:
-			print("gene_symbol_source= " + self.geneSymbolSource + delim, end=' ')
+			print "gene_symbol_source= " + self.geneSymbolSource + delim ,
 		if self.hgnc:
-			print("HGNC_ID= " + str( self.hgnc ) + delim, end=' ')
+			print "HGNC_ID= " + str( self.hgnc ) + delim ,
 		if self.impact:
-			print("impact= " + self.impact + delim, end=' ')
+			print "impact= " + self.impact + delim ,
 		if self.maxentscan:
-			print("Max_Ent_Scan[ref,alt,diff]= [ ", end=' ')
+			print "Max_Ent_Scan[ref,alt,diff]= [ " ,
 			for val in self.maxentscan:
-				print(str( val ) , ",", end=' ')
-			print(" ]" + delim, end=' ')
-		print("canonical= " + str( self.canonical ) + delim, end=' ')
+				print str( val ) , "," ,
+			print " ]" + delim ,
+		print "canonical= " + str( self.canonical ) + delim ,
 		if self.positionCDS:
-			print("positionCDS= " + str(self.positionCDS) + delim, end=' ')
+			print "positionCDS= " + str(self.positionCDS) + delim ,
 		if self.referenceCodons:
-			print("referenceCodons= " + self.referenceCodons + delim, end=' ')
+			print "referenceCodons= " + self.referenceCodons + delim ,
 		if self.alternateCodons:
-			print("alternateCodons= " + self.alternateCodons + delim, end=' ')
+			print "alternateCodons= " + self.alternateCodons + delim ,
 		if self.domains:
-			print("domains= {", end=' ')
-			for domain in list(self.domains.keys()):
-				print(str(domain), end=' ')
-				print(" : ", end=' ')
-				print(str(self.domains[domain]), end=' ')
-				print(", ", end=' ')
-			print("}" + delim, end=' ')
+			print "domains= {" ,
+			for domain in self.domains.keys():
+				print str(domain) ,
+				print " : " ,
+				print str(self.domains[domain]) ,
+				print ", " ,
+			print "}" + delim ,
 		if self.predictionPolyphen:
-			print("predictionPolyphen= " + self.predictionPolyphen + delim, end=' ')
+			print "predictionPolyphen= " + self.predictionPolyphen + delim ,
 		if self.scorePolyphen:
-			print("scorePolyphen= " + str(self.scorePolyphen) + delim, end=' ')
+			print "scorePolyphen= " + str(self.scorePolyphen) + delim ,
 		if self.transcriptsRefSeq:
-			print("transcriptsRefSeq= [", end=' ')
+			print "transcriptsRefSeq= [" ,
 			for ids in self.transcriptsRefSeq:
-				print(ids + delim, end=' ')
-			print("]" + delim, end=' ')
+				print ids + delim ,
+			print "]" + delim ,
 		if self.predictionSIFT:
-			print("predictionSIFT= " + self.predictionSIFT + delim, end=' ')
+			print "predictionSIFT= " + self.predictionSIFT + delim ,
 		if self.scoreSIFT:
-			print("scoreSIFT= " + str(self.scoreSIFT) + delim, end=' ')
-		print(" }")
+			print "scoreSIFT= " + str(self.scoreSIFT) + delim ,
+		print " }"
 	def attr(self):
 		attributes = super(vepconsequencevariant,self).attr()
 		if self.biotype:

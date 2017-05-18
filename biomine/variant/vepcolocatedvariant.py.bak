@@ -38,15 +38,15 @@ class vepcolocatedvariant(mafvariant):
 		onlyThisVariant = kwargs.get( 'minimal' , False )
 		if not onlyThisVariant:
 			super(vepcolocatedvariant,self).printVariant( delim , **kwargs )
-		print("vepcolocatedvariant: { ", end=' ')
+		print "vepcolocatedvariant: { " ,
 		if self.ID:
-			print("ID=", end=' ')
-			print(self.ID + delim, end=' ')
+			print "ID=" ,
+			print self.ID + delim ,
 		if self.phenotypeOrDisease:
-			print("phenotypeOrDisease= " + self.phenotypeOrDisease + delim, end=' ')
+			print "phenotypeOrDisease= " + self.phenotypeOrDisease + delim ,
 		if self.somatic:
-			print("somatic= " + self.somatic)
-		print(" }")
+			print "somatic= " + self.somatic
+		print " }"
 	def attr(self):
 		attributes = super(vepcolocatedvariant,self).attr()
 		if self.ID:

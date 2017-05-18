@@ -153,24 +153,24 @@ class vepvariant(mafvariant):
 		print( "vepvariant {" )
 		if not onlyThisVariant:
 			super(vepvariant,self).printVariant( delim , **kwargs )
-		print("vepvariant: { ", end=' ')
+		print "vepvariant: { " ,
 		if self.inputVariant:
-			print("inputVariant=", end=' ')
-			print(self.inputVariant + delim, end=' ')
+			print "inputVariant=" ,
+			print self.inputVariant + delim ,
 		if self.mostSevereConsequence:
-			print("mostSevereConsequence=", end=' ') 
-			print(str( self.mostSevereConsequence ) + delim, end=' ')
+			print "mostSevereConsequence=" , 
+			print str( self.mostSevereConsequence ) + delim ,
 		if self.consequences:
-			print("consequences= [", end=' ')
+			print "consequences= [" ,
 			for cons in sorted(self.consequences):
 				cons.printVariant(delim,**kwargs)
-			print("]" + delim, end=' ')
+			print "]" + delim ,
 		if self.colocations:
-			print("colocations= [", end=' ')
+			print "colocations= [" ,
 			for anno in self.colocations:
-				print(str(anno) + ", ", end=' ')
-			print("]" + delim, end=' ')
-		print(" }")
+				print str(anno) + ", " ,
+			print "]" + delim ,
+		print " }"
 		print( "}" )
 	def attr(self):
 		attributes = super(vepvariant,self).attr()
@@ -185,10 +185,10 @@ class vepvariant(mafvariant):
 		return attributes
 
 	def printConsequencesProteogenomicVar( self ):
-		print(self.proteogenomicVar())
+		print self.proteogenomicVar()
 		for consequence in self.consequences:
-			print(self.genomicVar() + ", ", end=' ')
-			print(consequence.codingHGVS())
+			print self.genomicVar() + ", " ,
+			print consequence.codingHGVS()
 
 	def parseEntryFromVEP( self , rootElement ):
 		''' Expect rootElement as JSON (dict) '''
@@ -216,7 +216,7 @@ class vepvariant(mafvariant):
 				otherVar.parseColocatedVariant( colocated )
 				self.colocations.append( otherVar )
 		except:
-			print(( "BioMine Warning: Cannot set colocated variants - no colocations of " + self.genomicVar() ))
+			print( "BioMine Warning: Cannot set colocated variants - no colocations of " + self.genomicVar() )
 			pass
 			
 	def setTranscriptConsequences( self , transcriptConsequences ):
@@ -232,5 +232,5 @@ class vepvariant(mafvariant):
 				if otherVar.canonical:
 					self.gene = otherVar.gene
 		except:
-			print(( "BioMine Warning: Cannot set transcript consequences - no consequence for " + self.genomicVar() ))
+			print( "BioMine Warning: Cannot set transcript consequences - no consequence for " + self.genomicVar() )
 			pass
