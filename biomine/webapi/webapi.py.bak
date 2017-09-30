@@ -25,15 +25,15 @@ class webapi(object):
 		self.data = {}
 
 	def printInfo( self ):
-		print("Response = " + str( self.response ) + ", ok? " + str( self.response.ok ))
-		print("Endpoint = " + self.endpoint)
-		print("Subset = " + self.subset)
-		print("Action = " + self.action)
-		print("URL = " + self.buildURL())
-		print("Headers = ", end=' ')
-		print(self.headers)
-		print("Data = ", end=' ')
-		print(self.data)
+		print "Response = " + str( self.response ) + ", ok? " + str( self.response.ok )
+		print "Endpoint = " + self.endpoint
+		print "Subset = " + self.subset
+		print "Action = " + self.action
+		print "URL = " + self.buildURL()
+		print "Headers = " ,
+		print self.headers
+		print "Data = " ,
+		print self.data
 
 	def setSubset(self,subset):
 		self.subset = subset
@@ -68,11 +68,11 @@ class webapi(object):
 		self.action += "%20" + condition + "%20" + term + "=" + str(value)
 
 	def multiOr(self,term,values):
-		values = list(map(str,values))
+		values = map(str,values)
 		stripped = [ v.strip() for v in values ]
 		self.action += term + ":OR(" + ','.join(stripped) + ")"
 	def addMultiOr(self,condition,term,values):
-		values = list(map(str,values))
+		values = map(str,values)
 		stripped = [ v.strip() for v in values ]
 		self.action += "%20" + condition + "%20" + term + ":OR(" + ','.join(stripped) + ")"
 
@@ -142,29 +142,29 @@ class webapi(object):
 						self.response = requests.get( url , timeout = timeout )
 			self.errorCheck()
 		except:
-			print("biomine::webapi::submit failed: ", end=' ')
+			print "biomine::webapi::submit failed: " ,
 			self.errorCheck()
 			pass
 		return self.response
 	
 	def errorCheck( self ):
 		if not self.response.status_code:
-			print("biomine::webapi::errorCheck Warning: no status code when trying " + self.buildURL())
+			print "biomine::webapi::errorCheck Warning: no status code when trying " + self.buildURL()
 			return
 		code = self.response.status_code
 		if code != 200:
 			if code == 204:
-				print("biomine::webapi::errorCheck Warning: no content from " + self.buildURL())
+				print "biomine::webapi::errorCheck Warning: no content from " + self.buildURL()
 			else:
-				print("biomine::webapi::errorCheck Warning: response from " + self.buildURL())
-				print("received status code = " + str(code))
+				print "biomine::webapi::errorCheck Warning: response from " + self.buildURL()
+				print "received status code = " + str(code)
 				self.printInfo()
 	def testURL( self , **kwargs ):
 		skip = kwargs.get( 'skip' , True )
 		if skip:
-			print(( "biomine::webapi::testURL Warning: site test skipped - " + self.url ))
+			print( "biomine::webapi::testURL Warning: site test skipped - " + self.url )
 			return True
-		print(( "biomine::webapi::testURL behavior: testing url - " + self.url ))
+		print( "biomine::webapi::testURL behavior: testing url - " + self.url )
 		response = self.submit()
 		if response.status_code < 300:
 			return True
@@ -192,21 +192,21 @@ class webapi(object):
 		try:
 			return ET.fromstring( self.response.text )
 		except:
-			print("biomine::webapi::getXMLRoot Warning: no root xml")
+			print "biomine::webapi::getXMLRoot Warning: no root xml"
 			return ET.fromstring( webapi.nullXML )
 	def getEntry( self , generator , text ):
 		try:
 			for entrygen in generator.iter( text ):
 				return entrygen.text
 		except:
-			print("biomine::webapi::getEntry Warning: no xml entry for " + text + " from " + generator.text)
+			print "biomine::webapi::getEntry Warning: no xml entry for " + text + " from " + generator.text
 			return webapi.nullXML
 	def getElement( self , generator , text ):
 		try:
 			for entrygen in generator.iter( text ):
 				return entrygen
 		except:
-			print("biomine::webapi::getElement Warning: no xml element for " + text + " from " + generator.text)
+			print "biomine::webapi::getElement Warning: no xml element for " + text + " from " + generator.text
 			return ET.fromstring( webapi.nullXML )
 
 	@staticmethod
@@ -214,4 +214,4 @@ class webapi(object):
 		return time.time() - initialTime
 	@staticmethod
 	def printRunTime( step , interval ):
-		print("Running " + step + " took " + str( interval ) + "seconds")
+		print "Running " + step + " took " + str( interval ) + "seconds"

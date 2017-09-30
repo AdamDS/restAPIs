@@ -97,7 +97,7 @@ class maf(object):
 			line = "\t".join( fields )
 			fh.write( line + "\n" )
 		fh.close()
-		print("finished generating .maf\n")
+		print "finished generating .maf\n"
 
 	@staticmethod
 	def getMember( self , member , **kwargs ):
@@ -123,7 +123,7 @@ class maf(object):
 			modRef = len( var.reference ) % 3
 			if var.reference == "-":
 				if var.alternate == "-": #->-; shouldn't happen
-					print("WARNING: no reference or alternate. Classification set to Silent.")
+					print "WARNING: no reference or alternate. Classification set to Silent."
 					return classes[6]
 				else:
 					if modAlt == 0: #->xyz; In_Frame_Ins
@@ -150,7 +150,7 @@ class maf(object):
 		else:
 			if var.reference == "-":
 				if var.alternate == "-": #->-; shouldn't happen
-					print("WARNING: no reference or alternate. Classification set to Silent.")
+					print "WARNING: no reference or alternate. Classification set to Silent."
 					return classes[6]
 				else:
 					if mod( len( var.alternate ) , 3 ) == 0: #->xyz; In_Frame_Ins

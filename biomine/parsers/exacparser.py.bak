@@ -81,7 +81,7 @@ class exacparser(object):
 		writeToFile = kwargs.get( 'writeToFile' , "biomine.parsed.exac.default.tsv" )
 		outFH = open( writeToFile , 'a' )
 		if ( outFH.closed ):
-			print("file handle closed: " + writeToFile)
+			print "file handle closed: " + writeToFile
 		inFile = None;
 		if ( re.match( "\.gz" , inputFile ) ):
 			inFile = vcf.Reader( open( inputFile , 'r' ) , compressed=True )
@@ -93,9 +93,9 @@ class exacparser(object):
 		metadata = inFile.metadata
 		for pairs in metadata:
 			if pairs == 'VEP': #TODO: make this a function, passed as an argument to getVCFMetaData
-				print("This .vcf has VEP annotations!")
+				print "This .vcf has VEP annotations!"
 				infos = inFile.infos
-				for info_ID in list(infos.items()):
+				for info_ID in infos.items():
 					if info_ID[0] == "CSQ": #CSQ tag the VEP annotation, probably means consequence
 						csq = info_ID
 						Info = csq[1] #Info(...)
@@ -216,9 +216,9 @@ class exacparser(object):
 				alternateBase = "-"
 		return revPositionOfMismatch
 	def errprint( self , case , ref , alt , positionOfMismatch , revPositionOfMismatch , begin , end ):
-		print("case" + str( case ) + ": " + '\t'.join( ( str( begin ) , ref , str( positionOfMismatch ) , str( end ) , alt , str( revPositionOfMismatch ) ) ))
+		print "case" + str( case ) + ": " + '\t'.join( ( str( begin ) , ref , str( positionOfMismatch ) , str( end ) , alt , str( revPositionOfMismatch ) ) )
 	def errfollowup( self , case , ref , alt , positionOfMismatch , revPositionOfMismatch , begin , end ):
-		print("followup" + str( case ) + ": " + '\t'.join( ( str( begin ) , ref , str( positionOfMismatch ) , str( end ) , alt , str( revPositionOfMismatch ) ) ))
+		print "followup" + str( case ) + ": " + '\t'.join( ( str( begin ) , ref , str( positionOfMismatch ) , str( end ) , alt , str( revPositionOfMismatch ) ) )
 	def determineOverlap( self , positionOfMismatch , revPositionOfMismatch , reference , alternate , start , alti , **kwargs ):
 		ref = reference
 		alt = str( alternate )
@@ -470,14 +470,14 @@ class exacparser(object):
 		bufferSize = kwargs.get( 'bufferSize' , 1000 )
 		if ( writeToFile and writeFunction ):
 			if ( len( self.variants ) > bufferSize ):
-				print(gc.get_count())
-				print("have " + str( len( self.variants ) ) + "; now write")
+				print gc.get_count()
+				print "have " + str( len( self.variants ) ) + "; now write"
 				for v in self.variants:
 					writeFunction( v , **kwargs )
-				print(gc.get_count())
-				print(gc.garbage)
+				print gc.get_count()
+				print gc.garbage
 				self.variants = []
-				print("flushed variants (" + str( len( self.variants ) ) + ")")
+				print "flushed variants (" + str( len( self.variants ) ) + ")"
 				self.variants.append( var )
 			else:
 				self.variants.append( var )
@@ -491,16 +491,16 @@ class exacparser(object):
 		bufferSize = kwargs.get( 'bufferSize' , 1000 )
 		outFH = kwargs.get( 'outFH' , None )
 		if ( len( self.variants ) > 0 and writeToFile and writeFunction ):
-			print("last " + str( len( self.variants ) ) + "; now write")
+			print "last " + str( len( self.variants ) ) + "; now write"
 			for v in self.variants:
 				writeFunction( v , **kwargs )
 			if ( bufferSize > 0 ):
 				self.variants = []
-				print("flushed variants (" + str( len( self.variants ) ) + ")")
+				print "flushed variants (" + str( len( self.variants ) ) + ")"
 		if ( type( outFH ) is 'file' ):
 			if ( not outFH.closed ):
 				outFH.close()
-				print("biomine closed")
+				print "biomine closed"
 		return None
 	
 	def getVCFKeyIndex( self , values , field ):

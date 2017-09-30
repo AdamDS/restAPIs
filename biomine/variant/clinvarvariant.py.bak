@@ -47,21 +47,21 @@ class clinvarvariant(mafvariant):
 		onlyThisVariant = kwargs.get( 'minimal' , False )
 		if not onlyThisVariant:
 			super(clinvarvariant,self).printVariant( delim , **kwargs )
-		print("clinvarvariant: { ", end=' ')
+		print "clinvarvariant: { " ,
 		if self.uid:
-			print("uid= ", end=' ')
-			print(self.uid + delim, end=' ')
+			print "uid= " ,
+			print self.uid + delim ,
 		if self.trait:
-			print("trait=> {", end=' ')
+			print "trait=> {" ,
 			for db in self.trait:
-				print(str(db) + "=>" + str(self.trait[db]) + delim, end=' ')
-			print("}", end=' ')
+				print str(db) + "=>" + str(self.trait[db]) + delim ,
+			print "}" ,
 		if self.clinical:
-			print("clinical=> {", end=' ')
-			print("description=>" + self.clinical["description"] + delim, end=' ')
-			print("review_status=>" + self.clinical["review_status"], end=' ')
-			print("}", end=' ')
-		print(" }")
+			print "clinical=> {" ,
+			print "description=>" + self.clinical["description"] + delim ,
+			print "review_status=>" + self.clinical["review_status"] ,
+			print "}" ,
+		print " }"
 
 	def getClinical( self ):
 		return self.clinical
@@ -95,7 +95,7 @@ class clinvarvariant(mafvariant):
 		skip = kwargs.get( 'skip' , True )
 		if pm.testURL( skip = skip ):
 			return self.checkPubMedItems( pm )
-		print("biomine::variant::clinvarvariant Warning: no site with uid ", end=' ')
+		print "biomine::variant::clinvarvariant Warning: no site with uid " ,
 		return None
 	def checkPubMedItems( self , pm ):
 		#TODO checks not yet working

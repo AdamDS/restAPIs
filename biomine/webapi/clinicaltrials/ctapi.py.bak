@@ -69,7 +69,7 @@ class ctapi(webapi):
 			if (subset == ctapi.results or subset == ctapi.show):
 				super(ctapi,self).__init__(ctapi.endpoint,subset)
 			else:
-				print("biomine ERROR: bad subset. webapi.subset initializing to results")
+				print "biomine ERROR: bad subset. webapi.subset initializing to results"
 				super(ctapi,self).__init__(ctapi.endpoint,ctapi.results)
 		self.url = ctapi.endpoint + self.subset
 	def __repr__(self):

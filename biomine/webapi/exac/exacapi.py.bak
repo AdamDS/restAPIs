@@ -33,7 +33,7 @@ class exacapi(webapi):
 			if ( subset == exacapi.variant ):
 				super(exacapi,self).__init__(useEndpoint,subset)
 			else:
-				print("biomine ERROR: bad subset. webapi.subset initializing to variant association results")
+				print "biomine ERROR: bad subset. webapi.subset initializing to variant association results"
 				super(exacapi,self).__init__(useEndpoint,exacapi.variant)
 
 	def setSubset(self,subset):
@@ -59,8 +59,8 @@ class exacapi(webapi):
 		try:
 			self.submit()
 		except:
-			print("biomine::webapi::exac::getPage failed on: ", end=' ')
-			print(var.genomicVar())
+			print "biomine::webapi::exac::getPage failed on: " ,
+			print var.genomicVar()
 			
 		return self.parseHTMLResponse()
 	
@@ -72,8 +72,8 @@ class exacapi(webapi):
 			try:
 				entries[var.genomicVar()] = self.getAlleleFrequency( var )
 			except:
-				print("biomine::webapi::exac::getAlleleFrequency failed on: ", end=' ')
-				print(var.genomicVar())
+				print "biomine::webapi::exac::getAlleleFrequency failed on: " ,
+				print var.genomicVar()
 #			self.printRunTime( "getAlleleFrequency " + var.genomicVar() , self.runTime( t ) )
 			#time.sleep(1)
 		return entries
@@ -107,7 +107,7 @@ class exacapi(webapi):
 				variantInfo = page['variant']
 				alleleFrequency = variantInfo.get( 'allele_freq' )
 			except:
-				print("biomine Warning: could not extract allele frequency ", end=' ')
-				print("from exac for " + var.genomicVar() + "")
+				print "biomine Warning: could not extract allele frequency " ,
+				print "from exac for " + var.genomicVar() + ""
 		return alleleFrequency
-		print("biomine Error: could not get allele frequency from exac")
+		print "biomine Error: could not get allele frequency from exac"

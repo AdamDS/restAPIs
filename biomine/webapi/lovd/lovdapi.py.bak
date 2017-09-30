@@ -26,7 +26,7 @@ class exacapi(webapi):
 			if ( subset == exacapi.variant ):
 				super(exacapi,self).__init__(exacapi.endpoint,subset)
 			else:
-				print("biomine ERROR: bad subset. webapi.subset initializing to variant association results")
+				print "biomine ERROR: bad subset. webapi.subset initializing to variant association results"
 				super(exacapi,self).__init__(exacapi.endpoint,exacapi.variant)
 
 	def setSubset(self,subset):
@@ -65,4 +65,4 @@ class exacapi(webapi):
 						alleleFrequency = dd[j].innerHTML
 						return float(alleleFrequency)
 		return
-		print("biomine Error: could not get allele frequency from exac")
+		print "biomine Error: could not get allele frequency from exac"

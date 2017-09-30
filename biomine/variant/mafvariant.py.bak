@@ -117,35 +117,35 @@ class mafvariant(variant):
 		print( "mafvariant {" )
 		if not onlyThisVariant:
 			super(mafvariant,self).printVariant(delim , **kwargs )
-			print("mafvariant: { ", end=' ')
+			print "mafvariant: { " ,
 			if self.referencePeptide:
-				print("referencePeptide= ", end=' ')
-				print(self.referencePeptide + delim, end=' ')
+				print "referencePeptide= " ,
+				print self.referencePeptide + delim ,
 			if self.positionPeptide:
-				print("positionPeptide= ", end=' ')
-				print(str(self.positionPeptide) + delim, end=' ')
+				print "positionPeptide= " ,
+				print str(self.positionPeptide) + delim ,
 			if self.alternatePeptide:
-				print("alternatePeptide= ", end=' ')
-				print(self.alternatePeptide + delim, end=' ')
+				print "alternatePeptide= " ,
+				print self.alternatePeptide + delim ,
 			if self.transcriptPeptide:
-				print("transcriptPeptide= ", end=' ')
-				print(self.transcriptPeptide + delim, end=' ')
+				print "transcriptPeptide= " ,
+				print self.transcriptPeptide + delim ,
 			if self.positionCodon:
-				print("positionCodon= ", end=' ')
-				print(str(self.positionCodon) + delim, end=' ')
+				print "positionCodon= " ,
+				print str(self.positionCodon) + delim ,
 			if self.transcriptCodon:
-				print("transcriptCodon= ", end=' ')
-				print(self.transcriptCodon + delim, end=' ')
+				print "transcriptCodon= " ,
+				print self.transcriptCodon + delim ,
 			if self.variantClass:
-				print("variantClass= ", end=' ')
-				print(self.variantClass + delim, end=' ')
+				print "variantClass= " ,
+				print self.variantClass + delim ,
 			if self.variantType:
-				print("variantType= ", end=' ')
-				print(self.variantType + delim, end=' ')
+				print "variantType= " ,
+				print self.variantType + delim ,
 			if self.disease:
-				print("disease= ", end=' ')
-				print(self.disease + delim, end=' ')
-			print(" }")
+				print "disease= " ,
+				print self.disease + delim ,
+			print " }"
 		print( "}" )
 	def attr(self):
 		attributes = []
@@ -285,10 +285,10 @@ class mafvariant(variant):
 			elif unknown:
 				pass
 			else:
-				print("biomine::variant::mafvariant Warning: could not find amino acid change or intronic change")
-				print("  Hint: Is the input amino acid change column correct?")
-				print("    Problem variant: ", end=' ')
-				print(( self.proteogenomicVar() + "  --  " + hgvsp ))
+				print "biomine::variant::mafvariant Warning: could not find amino acid change or intronic change"
+				print "  Hint: Is the input amino acid change column correct?"
+				print "    Problem variant: " ,
+				print( self.proteogenomicVar() + "  --  " + hgvsp )
 		else:
 			parts = hgvsp.split('\.')
 			pos = parts[-1]
@@ -468,9 +468,9 @@ class mafvariant(variant):
 				self.positionCodon = pos
 			return [ "" , pos , "" ]
 		else:
-			print("biomine::variant::mafvariant Warning: could not find HGVS codon change")
-			print("  Hint: Is the input codon column correct?")
-			print("    Problem variant: ", end=' ')
+			print "biomine::variant::mafvariant Warning: could not find HGVS codon change"
+			print "  Hint: Is the input codon column correct?"
+			print "    Problem variant: " ,
 			self.printVariant(',')
 		return [ "" , "" , "" ]
 

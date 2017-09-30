@@ -4,5 +4,5 @@
 
 from abc import ABCMeta
 
-class biomine(metaclass=ABCMeta):
-	pass
+class biomine:
+	__metaclass__ = ABCMeta

@@ -126,7 +126,7 @@ class entrezapi(webapi):
 			self.actionReturnParameters( )
 			return self.action
 		except:
-			print("entrez Error: can't use WebEnv")
+			print "entrez Error: can't use WebEnv"
 			pass
 	def buildSummaryAction( self , ids ):
 		self.uid = ','.join( ids )
@@ -180,7 +180,7 @@ class entrezapi(webapi):
 						#print "These are the ClinVar variants: " 
 						#print variants
 			except:
-				print("CharGer Warning: No ClinVar records in this batch\n")
+				print "CharGer Warning: No ClinVar records in this batch\n"
 		return variants
 	
 	def parseClinVarTitle( self , DocumentSummary ):
@@ -226,7 +226,7 @@ class entrezapi(webapi):
 				variants[var.genomicVar()] = var
 			else:
 				variants["null"] = var
-				print("entrez Warning: could not set ClinVar variant " + uid)
+				print "entrez Warning: could not set ClinVar variant " + uid
 		return variants
 	def getClinVarVariantEntry( self , var , DocumentSummary ):
 #		print "\twebapi::entrez::entrezapi::getClinVarVariantEntry"
@@ -258,7 +258,7 @@ class entrezapi(webapi):
 			var.gene = self.getEntry( gene , 'symbol' )
 			var.strand = self.getEntry( gene , 'strand' )
 		if not var.genomicVar():
-			print("entrez Warning: no ClinVar variant entry")
+			print "entrez Warning: no ClinVar variant entry"
 	def getClinVarTraitEntry( self , var , DocumentSummary ):
 #		print "\twebapi::entrez::entrezapi::getClinVarTraitEntry"
 		try:
@@ -276,7 +276,7 @@ class entrezapi(webapi):
 					trait_xrefs.update( { trait_name : txr } )
 					var.trait.update( { trait_name : trait_xrefs } )
 		except:
-			print("entrez Warning: no ClinVar trait entry")
+			print "entrez Warning: no ClinVar trait entry"
 			pass
 	def getClinVarClinicalEntry( self , var , DocumentSummary ):
 #		print "\twebapi::entrez::entrezapi::getClinVarClinicalEntry"
@@ -285,13 +285,13 @@ class entrezapi(webapi):
 				var.clinical["description"] = self.getEntry( clinical_significance , 'description' ).strip()
 				var.clinical["review_status"] = self.getEntry( clinical_significance , 'review_status' ).strip()
 		except:
-			print("entrez Warning: no ClinVar clinical entry")
+			print "entrez Warning: no ClinVar clinical entry"
 			pass
 	def getClinVarPubMedIDs( self , var , DocumentSummary ):
 		try:
 			return var.linkPubMed()
 		except:
-			print("entrez Error: no ClinVar uid")
+			print "entrez Error: no ClinVar uid"
 			pass
 			
 
@@ -319,4 +319,4 @@ class entrezapi(webapi):
 		root = self.getXMLRoot()
 		entries = {}
 		for DocSum in root.iter( 'DocSum' ):
-			print("")
+			print ""

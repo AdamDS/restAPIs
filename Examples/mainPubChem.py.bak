@@ -18,11 +18,11 @@ def parseArgs( argv ):
 	try:
 		opts, args = getopt.getopt( argv , "h:i:o:c:d:s:" , ["input=" , "output=" , "compound=" , "identifier=" , "search="] )
 	except getopt.GetoptError:
-		print("biomine ERROR: Command not recognized")
+		print "biomine ERROR: Command not recognized"
 		print( helpText ) 
 		sys.exit(2)
 	if not opts:
-		print("biomine ERROR: Expected flagged input")
+		print "biomine ERROR: Expected flagged input"
 		print( helpText ) 
 		sys.exit(2)
 	for opt, arg in opts:
@@ -46,9 +46,9 @@ def checkConnection():
 	pubchemInstance = "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/aspirin/synonyms/XML"
 	res = requests.get( pubchemInstance )
 	if res:
-		print("have response")
+		print "have response"
 	else:
-		print(res.status_code)
+		print res.status_code
 
 def readCompounds( inputFile ):
 	compounds = []
@@ -81,7 +81,7 @@ def main( argv ):
 	if compound:
 		results = pubchemInstance.compoundSynonyms( compound , search = search , identifier = identifier )
 
-	print(results)
+	print results
 
 	#print pubchemInstance.headers
 	#print pubchemInstance.data

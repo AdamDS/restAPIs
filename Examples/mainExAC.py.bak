@@ -18,11 +18,11 @@ def parseArgs( argv ):
 	try:
 		opts, args = getopt.getopt( argv , "h:i:o:g:t" , ["input=" , "output=" , "genVar="] )
 	except getopt.GetoptError:
-		print("biomine ERROR: Command not recognized")
+		print "biomine ERROR: Command not recognized"
 		print( helpText ) 
 		sys.exit(2)
 	if not opts:
-		print("biomine ERROR: Expected flagged input")
+		print "biomine ERROR: Expected flagged input"
 		print( helpText ) 
 		sys.exit(2)
 	for opt, arg in opts:
@@ -44,9 +44,9 @@ def checkConnection():
 	exac = "http://exac.broadinstitute.org/variant/22-46615880-T-C"
 	res = requests.get( exac )
 	if res:
-		print("have response")
+		print "have response"
 	else:
-		print(res.status_code)
+		print res.status_code
 
 def main( argv ):
 	values = parseArgs( argv )
@@ -57,14 +57,14 @@ def main( argv ):
 
 	results = ""
 	exacInstance = exacapi()
-	print(genVar)
+	print genVar
 	g = genVar.split( '-' )
 	var = variant.variant( chromosome=g[0] , start=g[1] , reference=g[2] , mutant=g[3] )
 	var.reference = 'd'
 
 	aF = exacInstance.getAlleleFrequency( var )
 	var.printVariant(' ')
-	print("Allele Frequency = " + str(aF))
+	print "Allele Frequency = " + str(aF)
 
 if __name__ == "__main__":
 	main( sys.argv[1:] )
