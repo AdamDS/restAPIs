@@ -230,7 +230,7 @@ class variant(object):
 				self.stop = len( self.reference ) + self.start - 1
 	def cleanChromosome( self ):
 		''' Get the chromosome number in case chr or Chr is present'''
-		if type( self.chromosome ) == "str":
+		if type( self.chromosome ) is str:
 			chrom = self.chromosome.lower()
 			clean = chrom.replace( "chr" , "" )
 			self.chromosome = clean.upper()
