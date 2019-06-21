@@ -278,7 +278,7 @@ class mafvariant(variant):
 #TODO handle splice variants: NM_000030.2:c.424-2A>G  NP_000021.1:p.Gly_142Gln145del
 			changep = re.match( "p\.([a-zA-Z\*]+?)([0-9\?]+?)([a-zA-Z]{1,3}|[\*\?])(ext[0-9\*\?]*)*" , hgvsp )
 			changee = re.match( "(e)([0-9]+?)([\+\-][0-9]+?)" , hgvsp )
-			unknown = re.match( "p\.[\?\=\|(\=\)|0|0\?]" , hgvsp )
+			unknown = re.match( "p\..*[\?\=\|(\=\)|0|0\?]" , hgvsp )
 			if changep: #peptide
 				ref = changep.group( 1 )
 				pos = changep.group( 2 )
