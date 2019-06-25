@@ -1,5 +1,6 @@
 import re
 from biomine.variant.variant import variant
+from urllib2 import unquote
 
 class mafvariant(variant):
 	nonCoding = re.compile( "([NULL|\*|\+|\-])" )
@@ -260,6 +261,7 @@ class mafvariant(variant):
 		return hgvsp
 	def splitHGVSp( self , hgvsp ):
 ##		print "biomine::variant::mafvariant::splitHGVSp - "
+		hgvsp=unquote(hgvsp)
 		ref = ""
 		pos = ""
 		mut = ""
